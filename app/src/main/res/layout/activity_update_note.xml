@@ -3,11 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/backgrounds"
+    android:background="@drawable/openpage"
     android:layout_height="match_parent"
     tools:context=".UpdateNoteActivity"
     >
 
+
+    <TextView
+        android:id="@+id/tv_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Update task"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
@@ -23,21 +38,24 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="30dp" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_updated_title"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:hint="Enter updated Title"
         android:textColorHint="@color/grey"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeErrorColor="@color/black"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_heading"
         app:startIconDrawable="@drawable/ic_baseline_title_24"
         app:startIconTint="@color/grey">
 
@@ -46,23 +64,25 @@
             android:layout_height="wrap_content"
             android:inputType="textCapWords|textShortMessage"
             android:maxLines="2"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_updated_description"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:hint="Enter updated Description"
         android:textColorHint="@color/grey"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeErrorColor="@color/black"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/et_updated_title"
         app:startIconDrawable="@drawable/ic_baseline_description_24"
@@ -73,7 +93,7 @@
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textLongMessage|textMultiLine"
             android:maxLines="5"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,13 +102,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="@color/grey"
         android:contentDescription="Update"
         android:src="@drawable/ic_baseline_update_24"
+        android:textColor="@android:color/black"
         app:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@android:color/black"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_updated_description"
+        app:layout_constraintVertical_bias="0.605" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

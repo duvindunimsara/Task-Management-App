@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#ffffff">
+        android:background="#EDE4DC">
 
         <TextView
             android:id="@+id/text_title"
@@ -59,7 +59,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                app:backgroundTint="#8BC34A" />
+                app:backgroundTint="#2F7655" />
 
 
             <com.google.android.material.button.MaterialButton
