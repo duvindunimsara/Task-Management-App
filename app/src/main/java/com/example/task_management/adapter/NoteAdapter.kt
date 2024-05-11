@@ -7,42 +7,38 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_management.R
-import com.google.android.material.button.MaterialButton
 import com.example.task_management.model.NoteModel
-import com.example.task_management.utils.DialogBox
+import com.example.taskmanagementapp.utils.DialogBox
+import com.google.android.material.button.MaterialButton
 
 class NoteAdapter(
-
     private val context: Context,
-    private val dataSet: List<NoteModel>
-
+    private var dataSet: List<NoteModel>
 ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    inner class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private val originalDataSet: List<NoteModel> = dataSet.toList()
 
+    inner class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textTitle: TextView = view.findViewById(R.id.text_title)
         val textDescription: TextView = view.findViewById(R.id.text_description)
+        val textPriority: TextView = view.findViewById(R.id.text_priority)
         val btnEdit: MaterialButton = view.findViewById(R.id.btn_edit)
         val btnDelete: MaterialButton = view.findViewById(R.id.btn_delete)
-
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.main_recycler_single_item, parent, false)
-
         return NoteViewHolder(adapterLayout)
     }
 
-
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-
         val dialog = DialogBox()
         val item = dataSet[position]
 
         holder.textTitle.text = item.title
         holder.textDescription.text = item.description
+        holder.textPriority.text = "Priority: ${item.priority}"
 
         holder.btnEdit.setOnClickListener {
             dialog.editDialog(context, item)
@@ -53,10 +49,8 @@ class NoteAdapter(
         }
     }
 
-
     override fun getItemCount(): Int {
         return dataSet.size
     }
-
 
 }
