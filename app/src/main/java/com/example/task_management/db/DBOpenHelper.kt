@@ -9,9 +9,9 @@ import android.provider.BaseColumns
 import android.util.Log
 import com.example.task_management.model.NoteModel
 import com.example.task_management.utils.COLUMN_NAME_DESCRIPTION
+import com.example.task_management.utils.COLUMN_NAME_PRIORITY
 import com.example.task_management.utils.COLUMN_NAME_TITLE
 import com.example.task_management.utils.TABLE_NAME
-import com.example.task_management.utils.COLUMN_NAME_PRIORITY
 
 
 private const val SQL_CREATE_ENTRIES =
@@ -59,9 +59,14 @@ class DBOpenHelper(context: Context) : SQLiteOpenHelper(
         db.close()
     }
 
-    fun readNotes(): MutableList<NoteModel> {
+    fun readNotes(searchText: String = ""): MutableList<NoteModel> {
         val db = this.readableDatabase
-        val cursorNotes: Cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_NAME_TITLE LIKE ?"
+        val cursorNotes: Cursor = if (searchText.isNotEmpty()) {
+            db.rawQuery(query, arrayOf("%$searchText%"))
+        } else {
+            db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        }
         val notesList: MutableList<NoteModel> = mutableListOf()
 
         if (cursorNotes.moveToFirst()) {
@@ -79,6 +84,7 @@ class DBOpenHelper(context: Context) : SQLiteOpenHelper(
         cursorNotes.close()
         return notesList
     }
+
 
     fun updateNote(id: String, title: String, description: String, priority: Int) {
         val db = this.writableDatabase

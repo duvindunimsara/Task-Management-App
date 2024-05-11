@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_management.R
 import com.example.task_management.model.NoteModel
+
 import com.example.taskmanagementapp.utils.DialogBox
 import com.google.android.material.button.MaterialButton
 
@@ -53,4 +54,15 @@ class NoteAdapter(
         return dataSet.size
     }
 
+    // Function to update the dataset with filtered data
+    fun updateList(filteredDataSet: List<NoteModel>) {
+        dataSet = filteredDataSet
+        notifyDataSetChanged()
+    }
+
+    // Function to reset dataset to original data
+    fun resetList() {
+        dataSet = originalDataSet
+        notifyDataSetChanged()
+    }
 }
