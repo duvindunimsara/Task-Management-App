@@ -55,6 +55,12 @@ class AddNoteActivity : AppCompatActivity() {
             etPriority.requestFocus()
             return
         }
+        val priorityValue = priority.toIntOrNull()
+        if (priorityValue == null || priorityValue < 1 || priorityValue > 3) {
+            etPriority.error = "Priority must be a number between 1 and 3"
+            etPriority.requestFocus()
+            return
+        }
 
         dbOpenHelper.addNote(title, description, priority.toInt())
         Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show()

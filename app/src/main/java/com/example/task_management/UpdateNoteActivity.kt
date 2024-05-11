@@ -72,8 +72,16 @@ class UpdateNoteActivity : AppCompatActivity() {
             return
         }
 
-        if (etPriority.editText?.text.toString().isEmpty()) {
+        val priorityText = etPriority.editText?.text.toString()
+        if (priorityText.isEmpty()) {
             etPriority.error = "Please enter priority"
+            etPriority.requestFocus()
+            return
+        }
+
+        val priority = priorityText.toIntOrNull()
+        if (priority == null || priority !in 1..3) {
+            etPriority.error = "Priority must be a number between 1 and 3"
             etPriority.requestFocus()
             return
         }
