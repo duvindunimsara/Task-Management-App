@@ -16,7 +16,7 @@
         android:fontFamily="@font/bubblegum_sans"
         android:text="To Do List"
         android:textColor="@color/teal_700"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

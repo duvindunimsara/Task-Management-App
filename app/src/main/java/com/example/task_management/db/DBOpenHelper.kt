@@ -1,4 +1,4 @@
-package com.example.task_management.db
+package com.example.taskmanagementapp.db
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,19 +7,24 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
-import com.example.task_management.model.NoteModel
-import com.example.task_management.utils.COLUMN_NAME_DESCRIPTION
-import com.example.task_management.utils.COLUMN_NAME_PRIORITY
-import com.example.task_management.utils.COLUMN_NAME_TITLE
-import com.example.task_management.utils.TABLE_NAME
+import com.example.taskmanagementapp.model.NoteModel
+import com.example.taskmanagementapp.utils.COLUMN_NAME_DATE
+import com.example.taskmanagementapp.utils.COLUMN_NAME_DESCRIPTION
+import com.example.taskmanagementapp.utils.COLUMN_NAME_PRIORITY
+import com.example.taskmanagementapp.utils.COLUMN_NAME_TITLE
+import com.example.taskmanagementapp.utils.TABLE_NAME
 
+
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val SQL_CREATE_ENTRIES =
     "CREATE TABLE $TABLE_NAME (" +
             "${BaseColumns._ID} INTEGER PRIMARY KEY," +
             "$COLUMN_NAME_TITLE TEXT," +
             "$COLUMN_NAME_DESCRIPTION TEXT," +
-            "$COLUMN_NAME_PRIORITY INTEGER)"
+            "$COLUMN_NAME_PRIORITY INTEGER," +
+            "$COLUMN_NAME_DATE TEXT)"
 
 private const val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS $TABLE_NAME"
 
@@ -31,7 +36,7 @@ class DBOpenHelper(context: Context) : SQLiteOpenHelper(
 ) {
 
     companion object {
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val DATABASE_NAME = "NoteApp.db"
     }
 
@@ -48,12 +53,13 @@ class DBOpenHelper(context: Context) : SQLiteOpenHelper(
         onUpgrade(db, oldVersion, newVersion)
     }
 
-    fun addNote(title: String, description: String, priority: Int) {
+    fun addNote(title: String, description: String, priority: Int, date: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_NAME_TITLE, title)
             put(COLUMN_NAME_DESCRIPTION, description)
             put(COLUMN_NAME_PRIORITY, priority)
+            put(COLUMN_NAME_DATE, date)
         }
         db?.insert(TABLE_NAME, null, values)
         db.close()
@@ -76,7 +82,8 @@ class DBOpenHelper(context: Context) : SQLiteOpenHelper(
                         cursorNotes.getInt(0),
                         cursorNotes.getString(1),
                         cursorNotes.getString(2),
-                        cursorNotes.getInt(3)
+                        cursorNotes.getInt(3),
+                        cursorNotes.getString(4)
                     )
                 )
             } while (cursorNotes.moveToNext())
@@ -86,12 +93,13 @@ class DBOpenHelper(context: Context) : SQLiteOpenHelper(
     }
 
 
-    fun updateNote(id: String, title: String, description: String, priority: Int) {
+    fun updateNote(id: String, title: String, description: String, priority: Int, date: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_NAME_TITLE, title)
             put(COLUMN_NAME_DESCRIPTION, description)
             put(COLUMN_NAME_PRIORITY, priority)
+            put(COLUMN_NAME_DATE, date)
         }
         try {
             db?.update(TABLE_NAME, values, "_id = ?", arrayOf(id))

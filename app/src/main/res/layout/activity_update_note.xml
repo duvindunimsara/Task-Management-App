@@ -76,7 +76,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Enter updated Description"
         android:textColorHint="@color/grey"
         app:boxStrokeColor="@color/black"
@@ -108,7 +108,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:hint="Enter updated Priority"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/black"
@@ -132,6 +132,41 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_updated_date"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Enter updated Date"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeErrorColor="@color/error_icon_color"
+        app:counterTextColor="@color/black"
+        app:cursorErrorColor="@color/error_icon_color"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconTint="@color/error_icon_color"
+        app:errorTextColor="@color/error_icon_color"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/et_updated_priority"
+        app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/black"
+            android:textColorLink="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

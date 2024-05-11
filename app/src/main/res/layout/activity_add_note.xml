@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="248dp"
-        android:text="Add new task"
         android:fontFamily="@font/bubblegum_sans"
+        android:text="Add new task"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -82,6 +82,7 @@
         app:boxStrokeErrorColor="@color/black"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
+        app:errorIconTint="@color/error_icon_color"
         app:errorTextColor="#FF0000"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
@@ -89,8 +90,7 @@
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/et_title"
         app:startIconDrawable="@drawable/ic_baseline_description_24"
-        app:errorIconTint="@color/error_icon_color"
-        app:startIconTint="@color/black"> >
+        app:startIconTint="@color/black">>
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -104,8 +104,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_priority"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
         android:hint="Priority"
         android:textColorHint="@color/black"
@@ -118,9 +119,10 @@
         app:errorIconTint="@color/error_icon_color"
         app:errorTextColor="@color/error_icon_color"
         app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/et_date"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_description"
         app:startIconDrawable="@drawable/ic_baseline_priority_high_24"
         app:startIconTint="@color/black">
@@ -128,8 +130,40 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_priority_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:inputType="number"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_date"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="162dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Select Date"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeErrorColor="@color/error_icon_color"
+        app:cursorErrorColor="@color/error_icon_color"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconTint="@color/error_icon_color"
+        app:errorTextColor="#FF0E00"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_priority"
+        app:layout_constraintTop_toTopOf="@+id/et_priority"
+        app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_date_input"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="date"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>

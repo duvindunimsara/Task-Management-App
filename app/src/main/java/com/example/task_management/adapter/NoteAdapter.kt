@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_management.R
-import com.example.task_management.model.NoteModel
+import com.example.taskmanagementapp.model.NoteModel
+
 
 import com.example.taskmanagementapp.utils.DialogBox
 import com.google.android.material.button.MaterialButton
@@ -23,9 +24,11 @@ class NoteAdapter(
         val textTitle: TextView = view.findViewById(R.id.text_title)
         val textDescription: TextView = view.findViewById(R.id.text_description)
         val textPriority: TextView = view.findViewById(R.id.text_priority)
+        val textDate: TextView = view.findViewById(R.id.text_date) // Add TextView for date
         val btnEdit: MaterialButton = view.findViewById(R.id.btn_edit)
         val btnDelete: MaterialButton = view.findViewById(R.id.btn_delete)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
@@ -40,6 +43,7 @@ class NoteAdapter(
         holder.textTitle.text = item.title
         holder.textDescription.text = item.description
         holder.textPriority.text = "Priority: ${item.priority}"
+        holder.textDate.text = "Date: ${item.date}" // Bind date to TextView
 
         holder.btnEdit.setOnClickListener {
             dialog.editDialog(context, item)
@@ -49,6 +53,7 @@ class NoteAdapter(
             dialog.deleteDialog(context, item)
         }
     }
+
 
     override fun getItemCount(): Int {
         return dataSet.size

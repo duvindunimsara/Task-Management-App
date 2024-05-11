@@ -1,6 +1,6 @@
 package com.example.task_management
 
-import com.example.task_management.model.NoteModel
+
 
 
 import android.content.Intent
@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_management.adapter.NoteAdapter
-import com.example.task_management.db.DBOpenHelper
+
 import com.example.taskmanagementapp.AddNoteActivity
+import com.example.taskmanagementapp.db.DBOpenHelper
+import com.example.taskmanagementapp.model.NoteModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.Locale
 

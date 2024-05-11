@@ -1,25 +1,27 @@
-package com.example.task_management
+package com.example.taskmanagementapp
 
 import android.content.Intent
 import android.os.Bundle
 import android.provider.BaseColumns
-import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.task_management.db.DBOpenHelper
-import com.example.task_management.utils.COLUMN_NAME_DESCRIPTION
-import com.example.task_management.utils.COLUMN_NAME_PRIORITY
-import com.example.task_management.utils.COLUMN_NAME_TITLE
+import com.example.task_management.MainActivity
+import com.example.task_management.R
+import com.example.taskmanagementapp.db.DBOpenHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
-
+import com.example.taskmanagementapp.utils.COLUMN_NAME_DATE
+import com.example.taskmanagementapp.utils.COLUMN_NAME_DESCRIPTION
+import com.example.taskmanagementapp.utils.COLUMN_NAME_PRIORITY
+import com.example.taskmanagementapp.utils.COLUMN_NAME_TITLE
 
 class UpdateNoteActivity : AppCompatActivity() {
 
     private lateinit var etUpdatedTitle: TextInputLayout
     private lateinit var etUpdatedDescription: TextInputLayout
-    private lateinit var etPriority: TextInputLayout // New field for priority
+    private lateinit var etUpdatedPriority: TextInputLayout
+    private lateinit var etUpdatedDate: TextInputLayout // New field for date
     private lateinit var fabUpdate: FloatingActionButton
     private val dbOpenHelper = DBOpenHelper(this)
 
@@ -29,26 +31,26 @@ class UpdateNoteActivity : AppCompatActivity() {
 
         etUpdatedTitle = findViewById(R.id.et_updated_title)
         etUpdatedDescription = findViewById(R.id.et_updated_description)
-        etPriority = findViewById(R.id.et_updated_priority) // Initialize priority field
+        etUpdatedPriority = findViewById(R.id.et_updated_priority)
+        etUpdatedDate = findViewById(R.id.et_updated_date) // Initialize date field
         fabUpdate = findViewById(R.id.fab_update)
 
         val titleOld = intent.getStringExtra(COLUMN_NAME_TITLE)
         val descriptionOld = intent.getStringExtra(COLUMN_NAME_DESCRIPTION)
-        val priorityOld = intent.getIntExtra(COLUMN_NAME_PRIORITY, 0) // Get priority value
+        val priorityOld = intent.getIntExtra(COLUMN_NAME_PRIORITY, 0)
+        val dateOld = intent.getStringExtra(COLUMN_NAME_DATE) // Get date value
 
         if (!titleOld.isNullOrBlank()) {
-            etUpdatedTitle.editText?.text =
-                Editable.Factory.getInstance().newEditable(titleOld)
-            etUpdatedDescription.editText?.text =
-                Editable.Factory.getInstance().newEditable(descriptionOld)
-            etPriority.editText?.text =
-                Editable.Factory.getInstance().newEditable(priorityOld.toString()) // Set priority value
+            etUpdatedTitle.editText?.setText(titleOld)
+            etUpdatedDescription.editText?.setText(descriptionOld)
+            etUpdatedPriority.editText?.setText(priorityOld.toString())
+            etUpdatedDate.editText?.setText(dateOld) // Set date value
 
-            Log.d("UpdateNoteActivity", titleOld.toString())
-            Log.d("UpdateNoteActivity", descriptionOld.toString())
+            Log.d("com.example.taskmanagementapp.UpdateNoteActivity", titleOld.toString())
+            Log.d("com.example.taskmanagementapp.UpdateNoteActivity", descriptionOld.toString())
 
         } else {
-            Log.d("UpdateNoteActivity", "value was null")
+            Log.d("com.example.taskmanagementapp.UpdateNoteActivity", "value was null")
             Toast.makeText(this, "Value was null", Toast.LENGTH_SHORT).show()
         }
 
@@ -72,26 +74,29 @@ class UpdateNoteActivity : AppCompatActivity() {
             return
         }
 
-        val priorityText = etPriority.editText?.text.toString()
+        val priorityText = etUpdatedPriority.editText?.text.toString()
         if (priorityText.isEmpty()) {
-            etPriority.error = "Please enter priority"
-            etPriority.requestFocus()
+            etUpdatedPriority.error = "Please enter priority"
+            etUpdatedPriority.requestFocus()
             return
         }
 
         val priority = priorityText.toIntOrNull()
         if (priority == null || priority !in 1..3) {
-            etPriority.error = "Priority must be a number between 1 and 3"
-            etPriority.requestFocus()
+            etUpdatedPriority.error = "Priority must be a number between 1 and 3"
+            etUpdatedPriority.requestFocus()
             return
         }
+
+        val date = etUpdatedDate.editText?.text.toString()
 
         if (notEmpty()) {
             dbOpenHelper.updateNote(
                 id,
                 etUpdatedTitle.editText?.text.toString(),
                 etUpdatedDescription.editText?.text.toString(),
-                etPriority.editText?.text.toString().toInt() // Convert priority to Int
+                priority,
+                date
             )
             Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
             val intentToMainActivity = Intent(this, MainActivity::class.java)
@@ -103,6 +108,7 @@ class UpdateNoteActivity : AppCompatActivity() {
     private fun notEmpty(): Boolean {
         return (etUpdatedTitle.editText?.text.toString().isNotEmpty()
                 && etUpdatedDescription.editText?.text.toString().isNotEmpty()
-                && etPriority.editText?.text.toString().isNotEmpty())
+                && etUpdatedPriority.editText?.text.toString().isNotEmpty()
+                && etUpdatedDate.editText?.text.toString().isNotEmpty())
     }
 }
