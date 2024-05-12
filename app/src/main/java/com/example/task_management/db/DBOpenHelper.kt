@@ -1,4 +1,4 @@
-package com.example.taskmanagementapp.db
+package com.example.task_management.db
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,12 +7,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
-import com.example.taskmanagementapp.model.NoteModel
-import com.example.taskmanagementapp.utils.COLUMN_NAME_DATE
-import com.example.taskmanagementapp.utils.COLUMN_NAME_DESCRIPTION
-import com.example.taskmanagementapp.utils.COLUMN_NAME_PRIORITY
-import com.example.taskmanagementapp.utils.COLUMN_NAME_TITLE
-import com.example.taskmanagementapp.utils.TABLE_NAME
+import com.example.task_management.model.NoteModel
+import com.example.task_management.utils.COLUMN_NAME_DATE
+import com.example.task_management.utils.COLUMN_NAME_DESCRIPTION
+import com.example.task_management.utils.COLUMN_NAME_PRIORITY
+import com.example.task_management.utils.COLUMN_NAME_TITLE
+import com.example.task_management.utils.TABLE_NAME
 
 
 import java.text.SimpleDateFormat

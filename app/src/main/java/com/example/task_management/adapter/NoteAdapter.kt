@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_management.R
-import com.example.taskmanagementapp.model.NoteModel
-
-
-import com.example.taskmanagementapp.utils.DialogBox
+import com.example.task_management.utils.DialogBox
+import com.example.task_management.model.NoteModel
 import com.google.android.material.button.MaterialButton
 
 class NoteAdapter(

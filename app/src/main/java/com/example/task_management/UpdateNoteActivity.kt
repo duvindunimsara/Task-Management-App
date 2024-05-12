@@ -1,4 +1,4 @@
-package com.example.taskmanagementapp
+package com.example.task_management
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,15 +6,13 @@ import android.provider.BaseColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.task_management.MainActivity
-import com.example.task_management.R
-import com.example.taskmanagementapp.db.DBOpenHelper
+import com.example.task_management.db.DBOpenHelper
+import com.example.task_management.utils.COLUMN_NAME_DATE
+import com.example.task_management.utils.COLUMN_NAME_DESCRIPTION
+import com.example.task_management.utils.COLUMN_NAME_PRIORITY
+import com.example.task_management.utils.COLUMN_NAME_TITLE
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
-import com.example.taskmanagementapp.utils.COLUMN_NAME_DATE
-import com.example.taskmanagementapp.utils.COLUMN_NAME_DESCRIPTION
-import com.example.taskmanagementapp.utils.COLUMN_NAME_PRIORITY
-import com.example.taskmanagementapp.utils.COLUMN_NAME_TITLE
 
 class UpdateNoteActivity : AppCompatActivity() {
 

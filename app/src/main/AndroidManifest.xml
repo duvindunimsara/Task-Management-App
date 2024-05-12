@@ -21,11 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.taskmanagementapp.UpdateNoteActivity"
+            android:name="com.example.task_management.UpdateNoteActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.taskmanagementapp.AddNoteActivity"
+            android:name="com.example.task_management.AddNoteActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

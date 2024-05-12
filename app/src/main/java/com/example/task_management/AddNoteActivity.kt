@@ -1,4 +1,4 @@
-package com.example.taskmanagementapp
+package com.example.task_management
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.task_management.MainActivity
 import com.example.task_management.R
-import com.example.taskmanagementapp.db.DBOpenHelper
+import com.example.task_management.db.DBOpenHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat

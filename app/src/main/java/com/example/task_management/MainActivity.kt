@@ -12,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_management.adapter.NoteAdapter
-
-import com.example.taskmanagementapp.AddNoteActivity
-import com.example.taskmanagementapp.db.DBOpenHelper
-import com.example.taskmanagementapp.model.NoteModel
+import com.example.task_management.db.DBOpenHelper
+import com.example.task_management.model.NoteModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.Locale
 
@@ -36,7 +34,10 @@ class MainActivity : AppCompatActivity() {
         fabCreate = findViewById(R.id.fab_create)
         searchEditText = findViewById(R.id.searchEditText) // Initialize search EditText
 
-        myDataset = dbOpenHelper.readNotes().sortedBy { it.priority }.toMutableList()
+        myDataset = dbOpenHelper.readNotes().sortedBy { it.priority.toDouble() }.toMutableList()
+
+
+
 
         mainRecyclerView.layoutManager = LinearLayoutManager(this)
         mainRecyclerView.adapter = NoteAdapter(this, myDataset)

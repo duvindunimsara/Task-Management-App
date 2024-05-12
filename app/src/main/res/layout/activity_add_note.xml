@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/openpage"
-    tools:context=".AddNoteActivity">
+    tools:context="com.e">
 
     <TextView
         android:id="@+id/tv_heading"
@@ -90,7 +90,7 @@
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/et_title"
         app:startIconDrawable="@drawable/ic_baseline_description_24"
-        app:startIconTint="@color/black">>
+        app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
