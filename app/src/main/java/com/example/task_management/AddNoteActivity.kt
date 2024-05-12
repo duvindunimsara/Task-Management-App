@@ -34,7 +34,7 @@ class AddNoteActivity : AppCompatActivity() {
         fabSend = findViewById(R.id.fab_send)
 
         // Set up click listener for date input field
-        etDate.setOnClickListener {
+        etDate.editText?.setOnClickListener {
             showDatePicker()
         }
 
@@ -104,4 +104,5 @@ class AddNoteActivity : AppCompatActivity() {
         val intentToMainActivity = Intent(this, MainActivity::class.java)
         startActivity(intentToMainActivity)
         finish()
-    }}
+    }
+}

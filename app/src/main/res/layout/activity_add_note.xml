@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/openpage"
-    tools:context="com.e">
+    >
 
     <TextView
         android:id="@+id/tv_heading"
@@ -163,10 +163,13 @@
             android:id="@+id/et_date_input"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="date"
+            android:inputType="none"
+            android:focusable="false"
             android:textColor="@color/black" />
 
+
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_send"

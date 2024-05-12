@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/openpage"
     android:layout_height="match_parent"
-    tools:context=".UpdateNoteActivity"
-    >
+    tools:context=".UpdateNoteActivity">
 
 
     <TextView
@@ -160,15 +159,15 @@
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_updated_date_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"
-            android:textColorLink="@color/black" />
+            android:inputType="none"
+            android:focusable="false"
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_update"

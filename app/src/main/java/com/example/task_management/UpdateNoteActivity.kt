@@ -1,9 +1,10 @@
 package com.example.task_management
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.BaseColumns
-import android.util.Log
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.task_management.db.DBOpenHelper
@@ -13,15 +14,17 @@ import com.example.task_management.utils.COLUMN_NAME_PRIORITY
 import com.example.task_management.utils.COLUMN_NAME_TITLE
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
+import java.util.*
 
-class UpdateNoteActivity : AppCompatActivity() {
+class UpdateNoteActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var etUpdatedTitle: TextInputLayout
     private lateinit var etUpdatedDescription: TextInputLayout
     private lateinit var etUpdatedPriority: TextInputLayout
-    private lateinit var etUpdatedDate: TextInputLayout // New field for date
+    private lateinit var etUpdatedDate: TextInputLayout
     private lateinit var fabUpdate: FloatingActionButton
     private val dbOpenHelper = DBOpenHelper(this)
+    private val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,49 +33,69 @@ class UpdateNoteActivity : AppCompatActivity() {
         etUpdatedTitle = findViewById(R.id.et_updated_title)
         etUpdatedDescription = findViewById(R.id.et_updated_description)
         etUpdatedPriority = findViewById(R.id.et_updated_priority)
-        etUpdatedDate = findViewById(R.id.et_updated_date) // Initialize date field
+        etUpdatedDate = findViewById(R.id.et_updated_date)
         fabUpdate = findViewById(R.id.fab_update)
 
+        etUpdatedDate.editText?.setOnClickListener {
+            showDatePicker()
+        }
+
+        // Retrieve data from intent
+        val id = intent.getIntExtra(BaseColumns._ID, 0).toString()
         val titleOld = intent.getStringExtra(COLUMN_NAME_TITLE)
         val descriptionOld = intent.getStringExtra(COLUMN_NAME_DESCRIPTION)
         val priorityOld = intent.getIntExtra(COLUMN_NAME_PRIORITY, 0)
-        val dateOld = intent.getStringExtra(COLUMN_NAME_DATE) // Get date value
+        val dateOld = intent.getStringExtra(COLUMN_NAME_DATE)
 
-        if (!titleOld.isNullOrBlank()) {
-            etUpdatedTitle.editText?.setText(titleOld)
-            etUpdatedDescription.editText?.setText(descriptionOld)
-            etUpdatedPriority.editText?.setText(priorityOld.toString())
-            etUpdatedDate.editText?.setText(dateOld) // Set date value
-
-            Log.d("com.example.taskmanagementapp.UpdateNoteActivity", titleOld.toString())
-            Log.d("com.example.taskmanagementapp.UpdateNoteActivity", descriptionOld.toString())
-
-        } else {
-            Log.d("com.example.taskmanagementapp.UpdateNoteActivity", "value was null")
-            Toast.makeText(this, "Value was null", Toast.LENGTH_SHORT).show()
-        }
+        // Set old data to respective fields
+        etUpdatedTitle.editText?.setText(titleOld)
+        etUpdatedDescription.editText?.setText(descriptionOld)
+        etUpdatedPriority.editText?.setText(priorityOld.toString())
+        etUpdatedDate.editText?.setText(dateOld)
 
         fabUpdate.setOnClickListener {
-            updateData()
+            updateData(id)
         }
     }
 
-    private fun updateData() {
-        val id = intent.getIntExtra(BaseColumns._ID, 0).toString()
+    private fun showDatePicker() {
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        if (etUpdatedTitle.editText?.text.toString().isEmpty()) {
+        DatePickerDialog(this, this, year, month, day).show()
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val selectedDate = "$year-${month + 1}-$dayOfMonth" // Month starts from 0
+        etUpdatedDate.editText?.setText(selectedDate)
+    }
+
+    private fun updateData(id: String) {
+        // Reset errors
+        etUpdatedTitle.error = null
+        etUpdatedDescription.error = null
+        etUpdatedPriority.error = null
+        etUpdatedDate.error = null
+
+        // Validate data
+        val title = etUpdatedTitle.editText?.text.toString()
+        val description = etUpdatedDescription.editText?.text.toString()
+        val priorityText = etUpdatedPriority.editText?.text.toString()
+        val date = etUpdatedDate.editText?.text.toString()
+
+        if (title.isEmpty()) {
             etUpdatedTitle.error = "Please enter your Title"
             etUpdatedTitle.requestFocus()
             return
         }
 
-        if (etUpdatedDescription.editText?.text.toString().isEmpty()) {
+        if (description.isEmpty()) {
             etUpdatedDescription.error = "Please enter your Description"
             etUpdatedDescription.requestFocus()
             return
         }
 
-        val priorityText = etUpdatedPriority.editText?.text.toString()
         if (priorityText.isEmpty()) {
             etUpdatedPriority.error = "Please enter priority"
             etUpdatedPriority.requestFocus()
@@ -86,27 +109,21 @@ class UpdateNoteActivity : AppCompatActivity() {
             return
         }
 
-        val date = etUpdatedDate.editText?.text.toString()
-
-        if (notEmpty()) {
-            dbOpenHelper.updateNote(
-                id,
-                etUpdatedTitle.editText?.text.toString(),
-                etUpdatedDescription.editText?.text.toString(),
-                priority,
-                date
-            )
-            Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
-            val intentToMainActivity = Intent(this, MainActivity::class.java)
-            startActivity(intentToMainActivity)
-            finish()
+        if (date.isEmpty()) {
+            etUpdatedDate.error = "Please enter a Date"
+            etUpdatedDate.requestFocus()
+            return
         }
-    }
 
-    private fun notEmpty(): Boolean {
-        return (etUpdatedTitle.editText?.text.toString().isNotEmpty()
-                && etUpdatedDescription.editText?.text.toString().isNotEmpty()
-                && etUpdatedPriority.editText?.text.toString().isNotEmpty()
-                && etUpdatedDate.editText?.text.toString().isNotEmpty())
+        // Additional date validation can be added here if needed
+
+        // Update note in the database
+        dbOpenHelper.updateNote(id, title, description, priority, date)
+        Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
+
+        // Navigate back to MainActivity
+        val intentToMainActivity = Intent(this, MainActivity::class.java)
+        startActivity(intentToMainActivity)
+        finish()
     }
 }
