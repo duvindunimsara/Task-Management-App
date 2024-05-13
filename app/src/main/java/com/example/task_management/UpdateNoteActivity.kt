@@ -78,12 +78,13 @@ class UpdateNoteActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         etUpdatedPriority.error = null
         etUpdatedDate.error = null
 
-        // Validate data
+        // Retrieve updated data from EditText fields
         val title = etUpdatedTitle.editText?.text.toString()
         val description = etUpdatedDescription.editText?.text.toString()
         val priorityText = etUpdatedPriority.editText?.text.toString()
         val date = etUpdatedDate.editText?.text.toString()
 
+        // Validate data
         if (title.isEmpty()) {
             etUpdatedTitle.error = "Please enter your Title"
             etUpdatedTitle.requestFocus()
@@ -126,4 +127,7 @@ class UpdateNoteActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         startActivity(intentToMainActivity)
         finish()
     }
+
+
+
 }

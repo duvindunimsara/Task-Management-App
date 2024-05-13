@@ -63,6 +63,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:inputType="textCapWords|textShortMessage"
             android:maxLines="2"
             android:textColor="@android:color/black"
@@ -95,6 +96,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:inputType="textCapSentences|textLongMessage|textMultiLine"
             android:maxLines="5"
             android:textColor="@android:color/black" />
@@ -131,6 +133,7 @@
             android:id="@+id/et_priority_input"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:fontFamily="sans-serif-black"
             android:inputType="number"
             android:textColor="@color/black" />
 
@@ -142,7 +145,7 @@
         android:layout_width="162dp"
         android:layout_height="59dp"
         android:layout_marginEnd="20dp"
-        android:hint="Select Date"
+        android:hint="Deadline Date"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/black"
         app:boxStrokeErrorColor="@color/error_icon_color"
@@ -163,8 +166,9 @@
             android:id="@+id/et_date_input"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="none"
             android:focusable="false"
+            android:fontFamily="sans-serif-black"
+            android:inputType="none"
             android:textColor="@color/black" />
 
 

@@ -36,6 +36,8 @@ class DialogBox {
                 putExtra(BaseColumns._ID, note.id)
                 putExtra(COLUMN_NAME_TITLE, note.title)
                 putExtra(COLUMN_NAME_DESCRIPTION, note.description)
+                putExtra(COLUMN_NAME_PRIORITY,note.priority)
+                putExtra(COLUMN_NAME_DATE,note.date)
             }
             context.startActivity(intent)
             (context as Activity).finish()
